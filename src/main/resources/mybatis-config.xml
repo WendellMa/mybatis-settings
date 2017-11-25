@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration><!-- 配置-->
+    <properties resource="jdbc.properties"><!-- 属性-->
+        <!--<property name="database.driver" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="database.url" value="jdbc:mysql://localhost:3306/mybatis?characterEncoding =UTF-8"/>-->
+        <!--<property name="database.username" value="root"/>-->
+        <!--<property name="database.password" value=""/>-->
+    </properties>
+    <settings><!-- 设置-->
+        <!-- 该配置影响所有映射器中缓存的全局开关-->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 延迟加载的全局开关。开启时,所有关联对象都会延迟加载。
+        在特定的关联关系中可以通过fetchType属性来覆盖该项的开关状态-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 是否允许单一语句返回多结果集 -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!-- 使用列标签代替列名。
+        不同驱动会有不同的表现，具体参考相关驱动文档或通过测试这两种不同的模式来观察所用驱动的结果 -->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 允许JDBC支持字段生成主键,需要驱动兼容。
+        如果没有设置为true,则这个设置强制使用字段生成主键,尽管一些驱动不能兼容但仍可正常工作(eg:Derby)-->
+        <setting name="useGeneratedKeys" value="false"/>
+        <!-- 指定mybatis如何自动映射列属性到字段或属性。
+        NONE表示取消自动映射;
+        PARTIAL表示只会自动映射,没有定义嵌套结果集和映射结果集。
+        FULL会自动映射任意复杂的结果集(无论是否嵌套) -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!-- 指自动映射中当有未知列(或未知属性类型)时的行为。
+        默认是不处理，只有当日志级别达到WARNING或者以下，才会显示相关日志，
+        如果失败会抛出SqlSessionException异常 -->
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <!-- 配置默认执行器。
+         SIMPLE是普通的执行器;
+         REUSE会重用预处理语句(prepared statements);
+         BATCH执行器将重用语句并执行批量更新-->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- 设置超时时间，它决定驱动等待数据库响应秒数 -->
+        <setting name="defaultStatementTimeout" value="25"/>
+        <!-- 设置数据库驱动程序默认返回的条数限制，此参数可以重新设置 -->
+        <setting name="defaultFetchSize" value="100"/>
+        <!-- 允许在嵌套语句中使用分页(RowBounds)。如果允许,设置false -->
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <!-- 是否开启自动驼峰命名规则映射,即从经典数据库列名A_COLUMN到java属性名aColumn的类似映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <!-- mybatis利用本地缓存机制(Local Cache)防止循环引用(circular references)和加速重复嵌套查询。
+         默认值为SESSION,这种情况下会缓存一个会话中执行的所有查询。
+         若设置值为STATEMENT,本地会话仅用在语句执行上,对相同SqlSession的不通调用将不会共享数据库-->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- 当没有参数提供特定的JDBC类型时,为空值指定JDBC类型。
+         某些驱动需要指定列的JDBC类型多数情况直接用一般类型即可,不如NULL、VARCHAR或OTHER-->
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <!-- 指定那个对象的方法触发一次加载 -->
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hasCode,toString"/>
+    </settings>
+
+    <typeAliases ><!-- 类型命名-->
+        <!--<package name="com.myq.mybatis.pojo"/>-->
+        <typeAlias type="com.myq.mybatis.pojo.User" alias="user"/>
+    </typeAliases>
+    <!--<typeHandlers>&lt;!&ndash; 类型处理器&ndash;&gt;-->
+        <!--<typeHandler javaType="" handler=""/>-->
+    <!--</typeHandlers>-->
+    <!--<objectFactory type=""/>&lt;!&ndash; 对象工厂&ndash;&gt;-->
+    <!--<plugins>&lt;!&ndash; 插件&ndash;&gt;-->
+        <!--<plugin interceptor=""></plugin>-->
+    <!--</plugins>-->
+    <environments default="environment"><!-- 配置环境-->
+        <environment id="environment"><!-- 环境变量-->
+            <transactionManager type="JDBC"/><!-- 事务管理器-->
+            <dataSource type="POOLED"><!-- 数据源-->
+                <property name="driver" value="${database.driver}"/>
+                <property name="url" value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--<mappers>&lt;!&ndash; 映射器&ndash;&gt;-->
+        <!--<mapper resource="mybatis/RoleMapper.xml"/>-->
+    <!--</mappers>-->
+</configuration>
