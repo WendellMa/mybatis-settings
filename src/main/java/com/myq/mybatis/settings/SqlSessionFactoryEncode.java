@@ -1,5 +1,6 @@
 package com.myq.mybatis.settings;
 
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -36,10 +37,5 @@ public class SqlSessionFactoryEncode {
             return null;
         }
         return sqlSessionFactory;
-    }
-
-    public static void main(String[]args){
-        getSqlSessionFactory();
-        System.out.println("success");
     }
 }

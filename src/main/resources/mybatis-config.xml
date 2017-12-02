@@ -56,8 +56,7 @@
     </settings>
 
     <typeAliases ><!-- 类型命名-->
-        <!--<package name="com.myq.mybatis.pojo"/>-->
-        <typeAlias type="com.myq.mybatis.pojo.User" alias="user"/>
+        <typeAlias type="com.myq.mybatis.pojo.Member" alias="member"/>
     </typeAliases>
     <!--<typeHandlers>&lt;!&ndash; 类型处理器&ndash;&gt;-->
         <!--<typeHandler javaType="" handler=""/>-->
@@ -65,7 +64,7 @@
     <!--<objectFactory type=""/>&lt;!&ndash; 对象工厂&ndash;&gt;-->
     <!--<plugins>&lt;!&ndash; 插件&ndash;&gt;-->
         <!--<plugin interceptor=""></plugin>-->
-    <!--</plugins>-->
+    <!--</plugins>--> 
     <environments default="environment"><!-- 配置环境-->
         <environment id="environment"><!-- 环境变量-->
             <transactionManager type="JDBC"/><!-- 事务管理器-->
@@ -77,7 +76,7 @@
             </dataSource>
         </environment>
     </environments>
-    <!--<mappers>&lt;!&ndash; 映射器&ndash;&gt;-->
-        <!--<mapper resource="mybatis/RoleMapper.xml"/>-->
-    <!--</mappers>-->
+    <mappers><!-- 映射器-->
+        <mapper resource="mapper/MemberMapper.xml"/>
+    </mappers>
 </configuration>
