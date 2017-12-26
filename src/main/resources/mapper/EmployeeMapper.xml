@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.myq.mybatis.mapper.EmployeeMapper">
+    <resultMap id="employee" type="com.myq.mybatis.pojo.Employee">
+        <!--
+           private Long id;
+    private String realName;
+    private SexEnum sex = null;
+    private Date birthDate;
+    private String mobile;
+    private String email;
+    private String note;
+    private WorkCard workCard;
+    private List<EmployeeTask> employeeTaskList = null;
+-->
+        <id column="id" property="id"/>
+        <id column="real_name" property="realName"/>
+        <id column="sex" property="sex" typeHandler="com.myq.mybatis.typeHandler.SexTypeHandler"/>
+        <result column="birthdate" property="birthDate"/>
+        <result column="mobile" property="mobile"/>
+        <result column="email" property="email"/>
+        <result column="note" property="note"/>
+        <association property="workCard" column="id"
+                     select="com.myq.mybatis.mapper.WorkCardMapper.getWorkCardByEmpId"/>
+        <collection property="employeeTaskList"
+                    column="id"
+                    select="com.myq.mybatis.mapper.EmployeeTaskMapper.getEmployeeTaskByEmpId"/>
+        <discriminator javaType="long" column="sex">
+            <case value="1" resultMap="maleHealthFormMapper"/>
+            <case value="0" resultMap="femaleHealthFormMapper"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="femaleHealthFormMapper"
+               type="com.myq.mybatis.pojo.FemaleEmployee"
+               extends="employee">
+        <association property="femaleHealthForm"
+                     column="id"
+                     select="com.myq.mybatis.mapper.FemaleHealthFormMapper.getFemaleHealthForm"/>
+    </resultMap>
+
+    <resultMap id="maleHealthFormMapper"
+               type="com.myq.mybatis.pojo.MaleEmployee"
+               extends="employee">
+        <association property="maleHealthForm"
+                     column="id"
+                     select="com.myq.mybatis.mapper.MaleHealthFormMapper.getMaleHealthForm"/>
+    </resultMap>
+
+    <select id="getEmployee" parameterType="long" resultMap="employee">
+        SELECT
+          id,
+          real_name as realName,
+          sex,
+          birthdate as birthDate,
+          mobile,
+          email,
+          note
+         FROM t_employee where id = #{id}
+    </select>
+</mapper>

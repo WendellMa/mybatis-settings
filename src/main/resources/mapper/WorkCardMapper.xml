@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.myq.mybatis.mapper.WorkCardMapper">
+    <select id="getWorkCardByEmpId" parameterType="long" resultType="com.myq.mybatis.pojo.WorkCard">
+        SELECT
+        t_work_card.id,
+        t_work_card.emp_id as empId,
+        t_work_card.vocation,
+        t_work_card.department,
+        t_work_card.note,
+        t_employee.mobile,
+        t_employee.real_name as realName
+        FROM  t_work_card JOIN t_employee on t_work_card.emp_id = t_employee.id
+        where t_work_card.emp_id = #{empId}
+    </select>
+</mapper>

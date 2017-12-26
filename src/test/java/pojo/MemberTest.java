@@ -21,20 +21,20 @@ public class MemberTest {
     private Logger logger = Logger.getLogger(MemberTest.class);
     private SqlSessionFactory sqlSessionFactory = SqlSessionFactoryEncode.getSqlSessionFactory();
 
-    @Test
-    public void getMemberById() {
-        SqlSession sqlSession = null;
-        try {
-            sqlSession = sqlSessionFactory.openSession();
-            MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-            Member member = memberMapper.getMemberById("12580887071004328000");
-            logger.info(member.print());
-        } finally {
-            if (sqlSession != null) {
-                sqlSession.close();
-            }
-        }
-    }
+//    @Test
+//    public void getMemberById() {
+//        SqlSession sqlSession = null;
+//        try {
+//            sqlSession = sqlSessionFactory.openSession();
+//            MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+//            Member member = memberMapper.getMemberById("12580887071004328000");
+//            logger.info(member.print());
+//        } finally {
+//            if (sqlSession != null) {
+//                sqlSession.close();
+//            }
+//        }
+//    }
 
     @Test
     public void getMemberByName() {

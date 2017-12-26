@@ -61,14 +61,18 @@ public class Member {
         this.birthDate = birthDate;
     }
 
-    public String print(){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("memberId",getMemberId());
-        map.put("mobile",getMobile());
-        map.put("cardNum",getCardNum());
-        map.put("nickName",getNickName());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        map.put("birthDate",simpleDateFormat.format(getBirthDate()));
-        return  new Gson().toJson(map);
+    public String print() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("memberId", getMemberId());
+        map.put("mobile", getMobile());
+        map.put("cardNum", getCardNum());
+        map.put("nickName", getNickName());
+        String birthDateStr = "";
+        if (getBirthDate() != null) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            birthDateStr = simpleDateFormat.format(getBirthDate());
+        }
+        map.put("birthDate", birthDateStr);
+        return new Gson().toJson(map);
     }
 }

@@ -14,6 +14,8 @@
         <!-- 延迟加载的全局开关。开启时,所有关联对象都会延迟加载。
         在特定的关联关系中可以通过fetchType属性来覆盖该项的开关状态-->
         <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 当启用时,对任意延迟属性的调用会使带有延迟加载属性的对象完整加载;反之,则每种属性按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
         <!-- 是否允许单一语句返回多结果集 -->
         <setting name="multipleResultSetsEnabled" value="true"/>
         <!-- 使用列标签代替列名。
@@ -55,16 +57,18 @@
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hasCode,toString"/>
     </settings>
 
-    <typeAliases ><!-- 类型命名-->
+    <typeAliases><!-- 类型命名-->
         <typeAlias type="com.myq.mybatis.pojo.Member" alias="member"/>
+        <!--<typeAlias type="com.myq.mybatis.pojo.SexEnum" alias="sex"/>-->
     </typeAliases>
     <!--<typeHandlers>&lt;!&ndash; 类型处理器&ndash;&gt;-->
-        <!--<typeHandler javaType="" handler=""/>-->
+    <!--<typeHandler javaType="com.myq.mybatis.pojo.SexEnum" handler="com.myq.mybatis.typeHandler.SexTypeHandler"/>-->
     <!--</typeHandlers>-->
+
     <!--<objectFactory type=""/>&lt;!&ndash; 对象工厂&ndash;&gt;-->
     <!--<plugins>&lt;!&ndash; 插件&ndash;&gt;-->
-        <!--<plugin interceptor=""></plugin>-->
-    <!--</plugins>--> 
+    <!--<plugin interceptor=""></plugin>-->
+    <!--</plugins>-->
     <environments default="environment"><!-- 配置环境-->
         <environment id="environment"><!-- 环境变量-->
             <transactionManager type="JDBC"/><!-- 事务管理器-->
@@ -78,5 +82,11 @@
     </environments>
     <mappers><!-- 映射器-->
         <mapper resource="mapper/MemberMapper.xml"/>
+        <mapper resource="mapper/EmployeeTaskMapper.xml"/>
+        <mapper resource="mapper/TaskMapper.xml"/>
+        <mapper resource="mapper/WorkCardMapper.xml"/>
+        <mapper resource="mapper/FemaleHealthFormMapper.xml"/>
+        <mapper resource="mapper/MaleHealthFormMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
     </mappers>
 </configuration>
